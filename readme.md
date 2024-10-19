@@ -14,6 +14,7 @@ Basic Rust app that will simulate some of the flows on computer, including:
 
 Simulation has option to write simple assembly-like programs with small set of instructions:  
 - `VER` - Toggle verbosity to enable/disable detailed execution logs.
+- `MOV` - Assingning RAM/Another Register's/Immediate Value to the register
 - `INIT` - Initialize memory addresses with values.
 - `LOAD` -  Load a value from memory into a register.
 - `ADD` - Add values in two registers and store the result into the third register
@@ -30,7 +31,11 @@ While I'm aiming to make it as low-level and realistic as possible - some of the
 BIOS> filename.asm
 ```  
 You can play around with some example programs:  
-- `calculator.asm gates.asm if_test.asm program.asm`
+- `calculator.asm` 
+- `gates.asm` 
+- `if_test.asm`
+- `program.asm`
+- `mov_test.asm`
 
 ### Program example  
 ```assembly
