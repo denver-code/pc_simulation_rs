@@ -181,6 +181,26 @@ impl CPU {
                     println!("NOT: R{} -> R{} -> {:08b}", parts[1], parts[2], self.registers[target_reg_index]);
                 }
             }
+            "MOV" => {
+                if parts.len() < 3 {
+                    return Err(format!("MOV instruction must have at least 3 parts: {}", instruction));
+                }
+                let reg_index = self.parse_register(parts[1])?;
+
+                let value = if parts[2].starts_with('R') {
+                    let reg =self.parse_register(parts[2])?;
+                    self.registers[reg]
+                } else if parts[2].starts_with('['){
+                    let address = self.parse_address(parts[2])?;
+                    self.ram.read(address)?
+                }else {
+                    self.parse_immediate(parts[2])?
+                };            
+                self.registers[reg_index] = value;
+                if self.verbose {
+                    println!("MOV: MOVED R{} = {:08b}", reg_index, self.registers[reg_index]);
+                }
+            }
             "IF" => {
                 let (condition, then_clause) = instruction.split_once("THEN").ok_or("IF instruction must contain THEN")?;
                 let condition = condition.trim();
