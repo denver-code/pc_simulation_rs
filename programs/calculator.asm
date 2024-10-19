@@ -1,8 +1,8 @@
-INIT [0x00] = 0b00000001 ; Add 1 to the memory at address 0x00
-INIT [0x01] = 0b00000001 ; Add 1 to the memory at address 0x01
+INIT [0x00] = 0b00010001 ; Add 1 to the memory at address 0x00
+INIT [0x01] = 0b01001101 ; Add 1 to the memory at address 0x01
 
 LOAD R1, [0x00] ; Load value from RAM to register
-LOAD R2, [0x00] ; Load value from RAM to register
+LOAD R2, [0x01] ; Load value from RAM to register
 
 OUT R1 ; Print Register 1
 OUT R2 ; Print Register 2
