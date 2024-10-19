@@ -50,7 +50,7 @@ impl BIOS {
     }
 
     fn run_program(&mut self, filename: &str) {
-        match read_lines(filename) {
+        match read_lines(format!("programs/{}",filename)) {
             Ok(lines) => {
                 let program: Vec<String> = lines.filter_map(Result::ok).collect();
                 println!("Running program: {}", filename);
