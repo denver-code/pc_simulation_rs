@@ -3,15 +3,15 @@ use crate::logic_gates::LogicGates;
 
 pub struct CPU {
     pub ram: RAM,
-    registers: [u8; 8],
-    verbose: bool,
+    pub registers: [u8; 8],
+    pub verbose: bool,
 }
 
 impl CPU {
     pub fn new(ram: RAM) -> Self {
         CPU {
             ram,
-            registers: [0; 8],
+             registers: [0; 8],
             verbose: false,
         }
     }

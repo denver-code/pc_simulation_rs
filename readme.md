@@ -1,3 +1,10 @@
+# Assembler Version | Dev  
+A version with a test WIP compilation.
+New BIOS command `compile program.asm program.bin` should in theory make a new `executable` `.bin` file or something similar that later can be executed.  
+Basically each instruction will be translated to the binary instruction in Hex, this should look like this:  
+![HEX of Bin File]({18A42B14-6133-4310-BCF3-05A8BBB26D8D}.png)
+ATM We can only execute it from the app too (BIOS), but I'm exploring how to write a "compiler". 
+
 # PC Simulation  
 Basic Rust app that will simulate some of the flows on computer, including: 
 - RAM  (`256 bytes`) - can be read, written and dumped for inspection.    

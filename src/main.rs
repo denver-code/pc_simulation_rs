@@ -4,6 +4,7 @@ mod bios;
 mod motherboard;
 mod power_supply;
 mod utils;
+mod assembler;
 pub mod cpu;
 
 use crate::ram::RAM;
