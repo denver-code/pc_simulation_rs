@@ -28,7 +28,9 @@ While I'm aiming to make it as low-level and realistic as possible - some of the
 ### Run asm-like code  
 ```bash
 BIOS> filename.asm
-```
+```  
+You can play around with some example programs:  
+- `calculator.asm gates.asm if_test.asm program.asm`
 
 ### Program example  
 ```assembly
