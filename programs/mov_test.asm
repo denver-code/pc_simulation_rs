@@ -7,6 +7,7 @@ MOV R1, 0b00000011              ; MOVE Immediate value to the Register
 OUT R1                          ; Print Register 1
 
 MOV R2, R1                      ; MOVE Copy Register 1 value to the Register 2
+IF R2 == R1 THEN OUT 0b01010101 ; Quick IF statement to check if R2 actually same as R1, if yes - print 0b01010101
 OUT R2                          ; Print Register 2
 
 INIT [0x01] = 0b00000010        ; Assign number 2(10)/0b00000010(2) to the 0x01 RAM Address
