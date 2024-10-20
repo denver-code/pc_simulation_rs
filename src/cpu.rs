@@ -96,6 +96,26 @@ impl CPU {
                     println!("ADD: {} + {} = {} -> {:08b}", parts[1], parts[2], parts[3], self.registers[r3_index]);
                 }
             }
+            "INC" => {
+                if parts.len() != 2 {
+                    return Err(format!("INC instruction must have 2 parts: {}", instruction));
+                }
+                let reg_index = self.parse_register(parts[1])?;
+                self.registers[reg_index] = self.registers[reg_index].wrapping_add(1);
+                if self.verbose {
+                    println!("INC: R{} += 1 -> {:08b}", parts[1], self.registers[reg_index]);
+                }
+            }
+            "DEC" => {
+                if parts.len() != 2 {
+                    return Err(format!("DEC instruction must have 2 parts: {}", instruction));
+                }
+                let reg_index = self.parse_register(parts[1])?;
+                self.registers[reg_index] = self.registers[reg_index].wrapping_sub(1);
+                if self.verbose {
+                    println!("DEC: R{} -= 1 -> {:08b}", parts[1], self.registers[reg_index]);
+                }
+            }
             "SUB" => {
                 if parts.len() != 4 {
                     return Err(format!("SUB instruction must have 4 parts: {}", instruction));
