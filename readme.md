@@ -31,11 +31,16 @@ While I'm aiming to make it as low-level and realistic as possible - some of the
 BIOS> filename.asm
 ```  
 You can play around with some example programs:  
-- `calculator.asm` 
-- `gates.asm` 
-- `if_test.asm`
-- `program.asm`
-- `mov_test.asm`
+- `calculator.asm` - Addition calculator program
+- `gates.asm`  - Test of the Logic Gates
+- `if_test.asm` - Simple IF ELSE logic
+- `program.asm` - Simple collection of different instructions
+- `mov_test.asm` - Test of MOV instruction
+- `div.asm` - Division Program
+- `incdec.asm` - Increment and Decrement Register
+- `mul.asm` - Multiplication Program
+- `qmov.asm` - QMOV Test
+- `sub.asm` - Substract Instruction
 
 ### Program example  
 ```assembly
