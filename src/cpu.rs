@@ -26,6 +26,7 @@ impl CPU {
     }
 
     fn parse_address(&self, addr: &str) -> Result<usize, String> {
+        let addr = addr.trim_end_matches(',');
         if !addr.starts_with('[') || !addr.ends_with(']') {
             return Err(format!("Invalid address format: {}", addr));
         }
@@ -52,6 +53,7 @@ impl CPU {
         if parts.is_empty() {
             return Ok(true);
         }
+
 
         match parts[0] {
             "LOAD" => {
@@ -185,8 +187,6 @@ impl CPU {
                 if parts.len() < 3 {
                     return Err(format!("MOV instruction must have at least 3 parts: {}", instruction));
                 }
-                let reg_index = self.parse_register(parts[1])?;
-
                 let value = if parts[2].starts_with('R') {
                     let reg =self.parse_register(parts[2])?;
                     self.registers[reg]
@@ -196,10 +196,22 @@ impl CPU {
                 }else {
                     self.parse_immediate(parts[2])?
                 };            
-                self.registers[reg_index] = value;
-                if self.verbose {
-                    println!("MOV: MOVED R{} = {:08b}", reg_index, self.registers[reg_index]);
+
+                if parts[1].starts_with('R'){
+                    let reg_index = self.parse_register(parts[1])?;
+                    self.registers[reg_index] = value;
+    
+                    if self.verbose {
+                        println!("MOV: MOVED R{} = {:08b}", reg_index, self.registers[reg_index]);
+                    }
+                } else if parts[1].starts_with('['){ 
+                    let address = self.parse_address(parts[1])?;
+                    self.ram.write(address, value)?;
+                    if self.verbose {
+                        println!("MOV: MOVED {} stored with -> {:08b}", parts[1], value);
+                    }
                 }
+                
             }
             "IF" => {
                 let (condition, then_clause) = instruction.split_once("THEN").ok_or("IF instruction must contain THEN")?;
