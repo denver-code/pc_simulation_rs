@@ -213,6 +213,33 @@ impl CPU {
                 }
                 
             }
+            "QMOV" => {
+                if parts.len() != 3 {
+                    return Err(format!("QMOV instruction must have 3 parts: {}", instruction));
+                }
+                let src = parts[2];
+                let dst = parts[1];
+
+                if src.starts_with('R') && dst.starts_with('[') {
+                    // Move from register to RAM
+                    println!("1");
+                    let reg_index = self.parse_register(src)?;
+                    let address = self.parse_address(dst)?;
+                    self.ram.write(address, self.registers[reg_index])?;
+                    self.registers[reg_index] = 0b00000000; // Clear the register
+                } else if src.starts_with('[') && dst.starts_with('R') {
+                    // Move from RAM to register
+                    let address = self.parse_address(src)?;
+                    let reg_index = self.parse_register(dst)?;
+                    self.registers[reg_index] = self.ram.read(address)?;
+                    self.ram.write(address, 0b00000000)?; // Clear the RAM value
+                } else {
+                    return Err(format!("Invalid QMOV instruction: {}", instruction));
+                }
+                if self.verbose {
+                    println!("QMOV: Moved value from {} to {}", src, dst);
+                }
+            }
             "IF" => {
                 let (condition, then_clause) = instruction.split_once("THEN").ok_or("IF instruction must contain THEN")?;
                 let condition = condition.trim();
