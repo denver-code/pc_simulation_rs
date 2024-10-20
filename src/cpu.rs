@@ -225,7 +225,7 @@ impl CPU {
                 let r2 = self.registers[
                     self.parse_register(parts[2])?
                 ];
-                let r3_index =  self.parse_register(parts[3])?;
+                let r3_index =  self.parse_register(parts[2])?;
                 self.registers[r3_index] = match parts[0] {
                     "AND" => LogicGates::and(r1, r2),
                     "OR" => LogicGates::or(r1, r2),
@@ -235,7 +235,7 @@ impl CPU {
                     _ => unreachable!(),
                 };
                 if self.verbose {
-                    println!("{}: R{} {} R{} = R{} -> {:08b}", parts[0], parts[1], parts[0], parts[2], parts[3], self.registers[r3_index]);
+                    println!("{}: R{} {} R{} = R{} -> {:08b}", parts[0], parts[1], parts[0], parts[2], parts[2], self.registers[r3_index]);
                 }
             }
             "NOT" => {
@@ -266,8 +266,10 @@ impl CPU {
                 };            
 
                 if parts[1].starts_with('R'){
+                    println!("{:?}", parts);
                     let reg_index = self.parse_register(parts[1])?;
-                    self.registers[reg_index] = value;
+                    println!("{:?}", reg_index);
+                    self.registers[reg_index-1] = value;
     
                     if self.verbose {
                         println!("MOV: MOVED R{} = {:08b}", reg_index, self.registers[reg_index]);
