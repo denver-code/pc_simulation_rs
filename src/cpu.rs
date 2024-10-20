@@ -96,6 +96,54 @@ impl CPU {
                     println!("ADD: {} + {} = {} -> {:08b}", parts[1], parts[2], parts[3], self.registers[r3_index]);
                 }
             }
+            "SUB" => {
+                if parts.len() != 4 {
+                    return Err(format!("SUB instruction must have 4 parts: {}", instruction));
+                }
+                let r1 = self.registers[
+                    self.parse_register(parts[1])?
+                ];
+                let r2 = self.registers[
+                    self.parse_register(parts[2])?
+                ];
+                let r3_index = self.parse_register(parts[3])?;
+                self.registers[r3_index] = r1.wrapping_sub(r2);
+                if self.verbose {
+                    println!("SUB: {} - {} = {} -> {:08b}", parts[1], parts[2], parts[3], self.registers[r3_index]);
+                }
+            }
+            "MUL" => {
+                if parts.len() != 4 {
+                    return Err(format!("MUL instruction must have 4 parts: {}", instruction));
+                }
+                let r1 = self.registers[
+                    self.parse_register(parts[1])?
+                ];
+                let r2 = self.registers[
+                    self.parse_register(parts[2])?
+                ];
+                let r3_index = self.parse_register(parts[3])?;
+                self.registers[r3_index] = r1.wrapping_mul(r2);
+                if self.verbose {
+                    println!("MUL: {} * {} = {} -> {:08b}", parts[1], parts[2], parts[3], self.registers[r3_index]);
+                }
+            }
+            "DIV" => {
+                if parts.len() != 4 {
+                    return Err(format!("DIV instruction must have 4 parts: {}", instruction));
+                }
+                let r1 = self.registers[
+                    self.parse_register(parts[1])?
+                ];
+                let r2 = self.registers[
+                    self.parse_register(parts[2])?
+                ];
+                let r3_index = self.parse_register(parts[3])?;
+                self.registers[r3_index] = r1.wrapping_div(r2);
+                if self.verbose {
+                    println!("DIV: {} / {} = {} -> {:08b}", parts[1], parts[2], parts[3], self.registers[r3_index]);
+                }
+            }
             "STORE" => {
                 if parts.len() != 3 {
                     return Err(format!("STORE instruction must have 3 parts: {}", instruction));
