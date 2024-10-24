@@ -4,7 +4,7 @@ Basic Rust app that will simulate some of the flows on computer, including:
   
   Addressed via hexadecimal addressed. 
 
-  Each memory ceal is 8 bits (1 byte) wide
+  Each memory cell is 8 bits (1 byte) wide
 - CPU  - Supports basic arithmetic and logic operations (`ADD, AND, OR, NAND, NOR, XOR, NOT`).  
   
   ATM asm-like code directly executed by the CPU, I'm not sure how it supposed to be.   
