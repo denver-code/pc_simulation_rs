@@ -1,9 +1,9 @@
-use std::fs::File;
-use std::io::{self, BufRead, Write};
-use std::path::Path;
 use crate::cpu::CPU;
 use crate::ram::RAM_SIZE;
 use crate::utils::parse_address;
+use std::fs::File;
+use std::io::{self, BufRead, Write};
+use std::path::Path;
 
 pub struct BIOS {
     pub cpu: CPU,
@@ -50,7 +50,7 @@ impl BIOS {
     }
 
     fn run_program(&mut self, filename: &str) {
-        match read_lines(format!("programs/{}",filename)) {
+        match read_lines(format!("programs/{}", filename)) {
             Ok(lines) => {
                 let program: Vec<String> = lines.filter_map(Result::ok).collect();
                 println!("Running program: {}", filename);
@@ -58,11 +58,15 @@ impl BIOS {
                     match self.cpu.execute(&instruction) {
                         Ok(continue_execution) => {
                             if !continue_execution {
-                                println!("Program halted.");
+                                println!("Program halted (0)");
                                 break;
                             }
                         }
                         Err(e) => {
+                            if e == "Program Halted" {
+                                println!("Program halted (1)");
+                                break;
+                            }
                             println!("Error executing instruction '{}': {}", instruction, e);
                             break;
                         }

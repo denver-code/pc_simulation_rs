@@ -10,9 +10,8 @@ impl LogicGates {
     }
 
     pub fn not(a: u8) -> u8 {
-        !a
+        !a & 0xFF
     }
-
     pub fn nand(a: u8, b: u8) -> u8 {
         Self::not(Self::and(a, b))
     }
