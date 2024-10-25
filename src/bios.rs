@@ -58,13 +58,13 @@ impl BIOS {
                     match self.cpu.execute(&instruction) {
                         Ok(continue_execution) => {
                             if !continue_execution {
-                                println!("Program halted (0)");
+                                println!("Program halted");
                                 break;
                             }
                         }
                         Err(e) => {
-                            if e == "Program Halted" {
-                                println!("Program halted (1)");
+                            if e.starts_with("Program Halted") {
+                                println!("{}", e);
                                 break;
                             }
                             println!("Error executing instruction '{}': {}", instruction, e);

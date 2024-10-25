@@ -270,7 +270,13 @@ impl CPU {
                 };
                 println!("OUT: {}", out_message);
             }
-            "HALT" => return Err(format!("Program Halted")),
+            "HALT" => {
+                if parts.len() == 1 {
+                    return Err(format!("Program Halted (0)"));
+                } else {
+                    return Err(format!("Program Halted (1)"));
+                }
+            }
             "AND" | "OR" | "NAND" | "NOR" | "XOR" => {
                 if parts.len() != 4 {
                     return Err(format!(

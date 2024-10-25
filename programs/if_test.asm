@@ -6,7 +6,7 @@ LOAD R1, [0x08]            ; Load value from address 0x08 into register R1 (6)
 LOAD R2, [0x10]            ; Load value from address 0x10 into register R2 (4)
 
 ; Test IF R1 > R2 THEN ADD R1, R2 to R3
-IF R1 > R2 THEN ADD R1, R2, R3    ; If R1 > R2, R3 = R1 + R2
+IF R1 > R2 THEN ADD R1, R2, R3 ELSE HALT 1    ; If R1 > R2, R3 = R1 + R2
 OUT R3                     ; Output the result in R3
 
 ; Test IF R1 < R2 THEN ADD R2, R1, R4
